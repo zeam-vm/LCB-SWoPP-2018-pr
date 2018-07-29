@@ -1,0 +1,15 @@
+.small
+	markdown:
+		## 評価環境
+ruby:
+	def markdown4
+		Redcarpet::Markdown.new(Redcarpet::Render::HTML, :fenced_code_blocks => true, :tables => true).render(<<"EOS"
+	|        | Mac Pro (Mid 2010)   |
+	|:-------|---------------------:|
+	| OS     | macOS Sierra 10.12.6 |
+	| Elixir | 1.6.1 (OTP 20.3.6)   |
+	EOS
+		)
+	end
+== markdown4
+
