@@ -1,0 +1,33 @@
+.small
+	markdown:
+		## Node.jsのコード例
+
+		* このウェブサーバーのプログラムを実行して，ウェブブラウザで `http://localhost:3000` にアクセスすると `Hello World` と表示される
+		* このウェブサーバーに接続があるごとに，`(req, res) => {...}` で示されるコールバック関数が呼び出される
+		* この際にスレッドを生成してスタック領域を確保するようなことはしない．
+
+ruby:
+	def markdown1
+		Redcarpet::Markdown.new(Redcarpet::Render::HTML, :fenced_code_blocks => true).render(<<"EOS"
+	```javascript
+	const http = require('http');
+
+	const hostname = '127.0.0.1';
+	const port = 3000;
+
+	const server = http.createServer((req, res) => {
+		res.statusCode = 200;
+		res.setHeader('Content-Type', 'text/plain');
+		res.end('Hello World\\n');
+	});
+
+	server.listen(port, hostname, () => {
+		console.log(
+			'Server running at http://${hostname}:${port}/'
+		);
+	});
+	```
+	EOS
+		)
+	end
+== markdown1
