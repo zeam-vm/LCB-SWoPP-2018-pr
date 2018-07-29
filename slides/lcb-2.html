@@ -1,0 +1,31 @@
+<div class="small"><h1>LCBのコード例</h1>
+
+<ul>
+<li>下記のプログラムは全体として<code>foo 0</code>と<code>bar 1</code>を表示する
+
+<ul>
+<li>1つめの軽量コールバックスレッドでは，<code>tid</code>の値が0なので，<code>foo 0</code>が表示される</li>
+<li>2つめの軽量コールバックスレッドでは <code>tid</code> の値が1なので，<code>bar 0</code>が表示される</li>
+<li>これらが順番に実行するようにスケジュールされるので，<code>foo 0</code>，<code>bar 1</code>と表示される</li>
+</ul></li>
+<li>プログラムの解説
+
+<ul>
+<li><code>pid = ZeamCallback.Receptor.new</code> で軽量コールバックスレッドを保持するプロセスを生成し，<code>pid</code>にプロセスIDを格納する</li>
+<li>続く2つの<code>send(pid, {:spawn, ...})</code> は，それぞれ1つずつ軽量コールバックスレッドを新規作成して起動する</li>
+<li>引数で与えられた<code>fn(tid) -&gt;</code>から<code>end</code>までがコールバックされる匿名関数である</li>
+<li><code>IO.puts</code> は文字列を表示する関数である</li>
+<li><code>tid</code> には軽量コールバックスレッドのIDが格納される</li>
+</ul></li>
+</ul>
+
+</div><pre><code class="elixir">pid = ZeamCallback.Receptor.new
+send(pid, {:spawn,
+    fn(tid) -&gt;
+        IO.puts &quot;foo #{tid}&quot;
+    end})
+send(pid, {:spawn,
+    fn(tid) -&gt;
+        IO.puts &quot;bar #{tid}&quot;
+    end})
+</code></pre>
