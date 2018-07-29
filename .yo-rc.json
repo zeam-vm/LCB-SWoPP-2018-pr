@@ -1,0 +1,10 @@
+{
+  "generator-reveal": {
+    "presentationTitle": "LCB-SWoPP-2018-pr",
+    "packageVersion": "0.0.0",
+    "useSass": true,
+    "deployToGithubPages": true,
+    "githubUsername": "zacky1972",
+    "githubRepository": "LCB-SWoPP-2018-pr"
+  }
+}
