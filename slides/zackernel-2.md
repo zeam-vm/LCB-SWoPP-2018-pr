@@ -1,4 +1,4 @@
-# Zackernelの内部構成
+## Zackernelの内部構成
 
 * Zackernelの`Schedule`クラスはコールバックする関数を保持する
 * `Schedule`同士を線形リスト構造でつないでいる
