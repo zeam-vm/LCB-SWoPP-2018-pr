@@ -1,0 +1,38 @@
+<div class="small"><h2>LCBの実装方針</h2>
+
+<ul>
+<li>LCBの実装にあたり，ReceptorとWorkerという2つのElixirプロセスを用意する
+
+<ul>
+<li>Receptor はLCBスレッドへのリクエストを受取り，すぐさまWorkerにコマンドを送った後，すぐに次のリクエストを待つ
+
+<ul>
+<li>こうすることで，遅滞なくリクエストを受け取ることができるようにする</li>
+</ul></li>
+<li>WorkerはReceptorのプロセスIDと実行環境変数<code>env</code>を引数とする関数である
+
+<ul>
+<li><code>env</code>には現状では次の3つの情報が入っている．
+
+<ul>
+<li><code>:queue</code>: 実行キュー，すなわち次以降に実行するコールバック関数の待ち行列を表すリスト</li>
+<li><code>:threads</code>: 現在のLCB IDとコールバック関数の対応関係を保持するマップ</li>
+<li><code>:next_tid</code>: 次にLCBを新規生成した時のIDを記録する</li>
+</ul></li>
+<li>Workerの動作
+
+<ul>
+<li>Workerは最初にReceptorからのすべてのコマンドを受け取り，実行キュー<code>env[:queue]</code>に登録していく</li>
+<li>Receptorからのコマンドが空になったら，実行キューからコマンドを1つ取り出し，そのコマンドのLCBのIDを引数にしてコマンドが指す関数をコールバックしてWorkerを再帰呼び出しする</li>
+<li>実行キューに何もなかった場合は10msスリープして，Workerを再帰呼び出しする</li>
+</ul></li>
+<li>Workerの持つ環境変数は，適宜Receptorに送られてバックアップされる
+
+<ul>
+<li>将来的には，もしWorkerが何らかの理由で無反応になってしまったときにはWorkerを再起動する機能を実装する予定である</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+
+</div>
