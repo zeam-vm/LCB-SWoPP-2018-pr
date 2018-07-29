@@ -41,6 +41,11 @@ img.heading {
   width: auto;
   vertical-align: middle; }
 
+img.heading30 {
+  height: 30px;
+  width: auto;
+  vertical-align: middle; }
+
 img.icon {
   width: 120px;
   margin: 30px !important; }
