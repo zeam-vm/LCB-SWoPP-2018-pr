@@ -1,6 +1,6 @@
 ## Zackernel
 
-* コールバック関数を用いてマルチタスク書rにするライブラリ
+* コールバック関数を用いてマルチタスク処理にするライブラリ
 	* Nodeプログラミングモデルに着想を得た
 	* C++で実装した
 * Zackernel: an Engine for IoT, available at https://github.com/zackernel/zackernel
