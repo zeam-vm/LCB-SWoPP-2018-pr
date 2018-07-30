@@ -1,0 +1,24 @@
+.small
+	markdown:
+		## LCBとElixirプロセスのメモリ消費量の比較
+ruby:
+	def markdown6
+		Redcarpet::Markdown.new(Redcarpet::Render::HTML, :fenced_code_blocks => true, :tables => true).render(<<"EOS"
+	| Num. of Tasks | LCB       | Elixir Process |
+	|--------------:|----------:|---------------:|
+	| 100           | 76144     | 358848         |
+	| 1000          | 881656    | 2877360        |
+	| 2000          | 1496296   | 5636232        |
+	| 5000          | 5734120   | 14160616       |
+	| 10000         | 13004640  | 28402248       |
+	EOS
+		)
+	end
+.small
+	== markdown6
+
+.small
+	markdown:
+		* 相関係数は良好であった
+			* LCB: 0.99284
+			* Elixirプロセス: 0.99998

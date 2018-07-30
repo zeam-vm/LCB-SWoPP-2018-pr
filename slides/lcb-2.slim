@@ -1,0 +1,35 @@
+.small
+	markdown:
+		# LCBのコード例
+
+		* 下記のプログラムは全体として`foo 0`と`bar 1`を表示する
+			* 1つめの軽量コールバックスレッドでは，`tid`の値が0なので，`foo 0`が表示される
+			* 2つめの軽量コールバックスレッドでは `tid` の値が1なので，`bar 0`が表示される
+			* これらが順番に実行するようにスケジュールされるので，`foo 0`，`bar 1`と表示される
+
+ruby:
+	def markdown3
+		Redcarpet::Markdown.new(Redcarpet::Render::HTML, :fenced_code_blocks => true).render(<<"EOS"
+	```elixir
+	pid = ZeamCallback.Receptor.new
+	send(pid, {:spawn,
+		fn(tid) ->
+			IO.puts "foo \#{tid}"
+		end})
+	send(pid, {:spawn,
+		fn(tid) ->
+			IO.puts "bar \#{tid}"
+		end})
+	```
+	EOS
+		)
+	end
+== markdown3
+
+.small
+	markdown:
+		* `pid = ZeamCallback.Receptor.new` で軽量コールバックスレッドを保持するプロセスを生成し，`pid`にプロセスIDを格納する
+		* 続く2つの`send(pid, {:spawn, ...}) ` は，それぞれ1つずつ軽量コールバックスレッドを新規作成して起動する
+		* 引数で与えられた`fn(tid) -> `から`end`までがコールバックされる匿名関数である
+		* `IO.puts` は文字列を表示する関数である
+		* `tid` には軽量コールバックスレッドのIDが格納される

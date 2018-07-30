@@ -1,0 +1,25 @@
+<div class="small"><h2>Node.jsのコード例</h2>
+
+<ul>
+<li>このウェブサーバーのプログラムを実行して，ウェブブラウザで <code>http://localhost:3000</code> にアクセスすると <code>Hello World</code> と表示される</li>
+<li>このウェブサーバーに接続があるごとに，<code>(req, res) =&gt; {...}</code> で示されるコールバック関数が呼び出される</li>
+<li>この際にスレッドを生成してスタック領域を確保するようなことはしない．</li>
+</ul>
+
+</div><pre><code class="javascript">const http = require(&#39;http&#39;);
+
+const hostname = &#39;127.0.0.1&#39;;
+const port = 3000;
+
+const server = http.createServer((req, res) =&gt; {
+    res.statusCode = 200;
+    res.setHeader(&#39;Content-Type&#39;, &#39;text/plain&#39;);
+    res.end(&#39;Hello World\n&#39;);
+});
+
+server.listen(port, hostname, () =&gt; {
+    console.log(
+        &#39;Server running at http://${hostname}:${port}/&#39;
+    );
+});
+</code></pre>

@@ -1,0 +1,73 @@
+<div class="small">
+  <h2>ZackernelとC++11スレッドのメモリ消費量の比較</h2>
+  
+</div>
+<div class="small">
+  <table><thead>
+  <tr>
+  <th style="text-align: right">Num. of Tasks</th>
+  <th style="text-align: right">Zackernel</th>
+  <th style="text-align: right">C++11 Thread</th>
+  </tr>
+  </thead><tbody>
+  <tr>
+  <td style="text-align: right">1</td>
+  <td style="text-align: right">0</td>
+  <td style="text-align: right">536576</td>
+  </tr>
+  <tr>
+  <td style="text-align: right">10</td>
+  <td style="text-align: right">0</td>
+  <td style="text-align: right">5365760</td>
+  </tr>
+  <tr>
+  <td style="text-align: right">100</td>
+  <td style="text-align: right">0</td>
+  <td style="text-align: right">53657600</td>
+  </tr>
+  <tr>
+  <td style="text-align: right">1000</td>
+  <td style="text-align: right">2097152</td>
+  <td style="text-align: right">537624576</td>
+  </tr>
+  <tr>
+  <td style="text-align: right">2000</td>
+  <td style="text-align: right">2097152</td>
+  <td style="text-align: right">1094123520</td>
+  </tr>
+  <tr>
+  <td style="text-align: right">5000</td>
+  <td style="text-align: right">4194304</td>
+  <td style="text-align: right">N/A</td>
+  </tr>
+  <tr>
+  <td style="text-align: right">10000</td>
+  <td style="text-align: right">5242880</td>
+  <td style="text-align: right">N/A</td>
+  </tr>
+  <tr>
+  <td style="text-align: right">20000</td>
+  <td style="text-align: right">7340032</td>
+  <td style="text-align: right">N/A</td>
+  </tr>
+  <tr>
+  <td style="text-align: right">50000</td>
+  <td style="text-align: right">10485760</td>
+  <td style="text-align: right">N/A</td>
+  </tr>
+  </tbody></table>
+  
+</div>
+<div class="small">
+  <ul>
+  <li>C++11スレッドの N/A はメモリ容量が超過してしまったため実行できなかった</li>
+  <li>相関係数は良好であった
+  
+  <ul>
+  <li>Zackernel: 0.8396</li>
+  <li>C++11スレッド: 0.99993</li>
+  </ul></li>
+  <li>Zackernel ではスレッド数が小さい場合にページサイズより小さなメモリ変化しかなかったので測定値に現れず，結果的に相関係数の絶対値が小さくなった</li>
+  </ul>
+  
+</div>
