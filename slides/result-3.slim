@@ -1,0 +1,30 @@
+.small
+	markdown:
+		## 評価環境
+ruby:
+	def markdown5
+		Redcarpet::Markdown.new(Redcarpet::Render::HTML, :fenced_code_blocks => true, :tables => true).render(<<"EOS"
+	| Num. of Tasks | Zackernel | C++11 Thread |
+	|--------------:|----------:|-------------:|
+	| 1             | 0         | 536576       |
+	| 10            | 0         | 5365760      |
+	| 100           | 0         | 53657600     |
+	| 1000          | 2097152   | 537624576    |
+	| 2000          | 2097152   | 1094123520   |
+	| 5000          | 4194304   | N/A          |
+	| 10000         | 5242880   | N/A          |
+	| 20000         | 7340032   | N/A          |
+	| 50000         | 10485760  | N/A          |
+	EOS
+		)
+	end
+.small
+	== markdown5
+
+.small
+	markdown:
+		* C++11スレッドの N/A はメモリ容量が超過してしまったため実行できなかった
+		* 相関係数は良好であった
+			* Zackernel: 0.8396
+			* C++11スレッド: 0.99993
+		* Zackernel ではスレッド数が小さい場合にページサイズより小さなメモリ変化しかなかったので測定値に現れず，結果的に相関係数の絶対値が小さくなった
